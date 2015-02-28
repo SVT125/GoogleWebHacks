@@ -1,7 +1,9 @@
 import apiclient.discovery import build
 from oauth2client.client import OAuth2WebServerFlow
+from auth import create_service
 
 import httplib2
+
 
 #Params: user email as string
 #Returns: A list of Event objects from the Calendar
@@ -28,7 +30,7 @@ def merge_calendars(emails):
         'summary':'Merged calendar'
         'timeZone':'America/Los_Angeles' #find the best timezone across calendars
     }
-    calendar_service = build('Calendar','3')
+    calendar_service = create_service()
     merged_calendar = calendar_service.calendars().insert(body=calendar_info).execute()
     all_events = compile_total_events(emails)
     for event in all_events:
