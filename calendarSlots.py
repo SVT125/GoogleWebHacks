@@ -37,4 +37,12 @@ def merge_calendars(emails):
         calendar_service.events().insert(calendarId=merged_calendar['id'],body=event).execute()
     return merged_calendar #Return the list of events instead from above?    
     
+class MainPage(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('Hello, World!')
+	
+application = webapp2.WSGIApplication([
+    ('/', MainPage),
+], debug=True)
     
